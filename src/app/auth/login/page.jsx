@@ -18,7 +18,7 @@ function LoginPage() {
     if(res.error) {
       setError(res.error)
     } else{
-      router.push('/dashboard')
+      router.push('/')
       router.refresh()
     }
     
@@ -33,7 +33,7 @@ function LoginPage() {
         {error && (
           <p className='bg-red-500 text-white p-2 rounded text-sm'>{error}</p>
         )}
-        <label htmlFor='email' className='text-slate-500 mb-2 block text-sm' >Correo</label>
+        <label htmlFor='email' className='text-slate-300 mb-2 block text-sm' >Correo</label>
         <input type="email"
           {...register("email", {
             required: {
@@ -52,7 +52,7 @@ function LoginPage() {
             >{errors.Email.message}</span>
           )
         }
-        <label htmlFor='password' className='text-slate-500 mb-2 block text-sm' >Contraseña</label>
+        <label htmlFor='password' className='text-slate-300 mb-2 block text-sm' >Contraseña</label>
         <input type="password"
           {...register("password", {
             required: {

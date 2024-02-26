@@ -24,13 +24,24 @@ export const authOptions = {
                 return {
                     id: userFound.id,
                     name: userFound.username,
-                    email: userFound.email
+                    email: userFound.email,
                 }
             }
         })
     ],
     pages: {
         signIn: "/auth/login"
+    },
+    callbacks: {
+        async session({ session, token, user }) {
+            const userFound = await db.user.findUnique({
+                where: {
+                    email: token.email
+                }
+            })
+            session.accessToken = userFound.linkID
+            return session
+        }
     }
 }
 

@@ -36,11 +36,39 @@ export async function POST(request) {
         }
 
         const hashedPassword = await bcrypt.hash(data.password, 10)
+        let responseBelvo;
+        try {
+            const auth = process.env.AUTH_BELVO
+
+            const response = await fetch('https://sandbox.belvo.com/api/links/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': auth,
+                },
+                body: JSON.stringify({
+                    "institution": "erebor_mx_retail",
+                    "username": data.username,
+                    "password": data.password,
+                    "access_mode": "single"
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            responseBelvo = await response.json();
+
+        } catch (error) {
+            console.error('Hubo un problema con el proveedor Belvo:', error);
+        }
+
         const newUser = await db.user.create({
             data: {
                 username: data.username,
                 email: data.email,
-                password: hashedPassword
+                password: hashedPassword,
+                linkID: responseBelvo.id
             }
         })
 

@@ -1,23 +1,17 @@
 import Link from 'next/link'
 import React from 'react'
-import { getServerSession } from 'next-auth/next'
+import { getServerSession,  } from 'next-auth/next'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 
 async function Navbar() {
     const session = await getServerSession(authOptions)
-    console.log(session)
     return (
-        <nav className='flex justify-between items-center bg-gray-950 text-white text-sm px-5 py-3'>
+        <nav className='flex justify-between items-center bg-blue-950 text-white text-sm px-5 py-3 sticky mb-14'>
             <h1 className='text-xl font-bold'><Link href={"/"}>Bancapp </Link></h1>
             <ul className='flex gap-x-2'>
                 {
                     !session?.user ? (
                         <>
-                            <li>
-                                <Link href={"/"}>
-                                    Inicio
-                                </Link>
-                            </li>
                             <li>
                                 <Link href={"/auth/login"}>
                                     Login
@@ -33,7 +27,7 @@ async function Navbar() {
                         (
                             <>
                                 <li>
-                                    <Link href={"/auth/login"}>
+                                    <Link href={"/"}>
                                         Dashboard
                                     </Link>
                                 </li>

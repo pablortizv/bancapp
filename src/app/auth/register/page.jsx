@@ -8,23 +8,27 @@ function RegisterPage() {
     const router = useRouter();
     const onSubmit = handleSubmit(async data => {
         if(data.password !== data.confirmPassword){
-            alert("contraseñas no coinciden")
-        }
-        const res = await fetch('/api/auth/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                username: data.username,
-                email: data.email,
-                password: data.password
-            }),
-            headers: {
-                'Content-Type': 'aplication/json'
+            alert("Contraseñas no coinciden")
+        }else if(data.password.length < 7) {
+            alert("La contraseña debe mínimo 8 dígitos")
+        } else {
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: data.username,
+                    email: data.email,
+                    password: data.password
+                }),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            
+            if(res.ok){     
+                router.push('/auth/login')
             }
-        })
-        
-        if(res.ok){
-            router.push('/auth/login')
         }
+        
         
     })
     return (
@@ -34,7 +38,7 @@ function RegisterPage() {
                     Registro
                 </h1>
 
-                <label htmlFor='username' className='text-slate-500 mb-2 block text-sm' >Usuario</label>
+                <label htmlFor='username' className='text-slate-300 mb-2 block text-sm' >Usuario</label>
                 <input type="text"
                     {...register("username", {
                         required: {
@@ -53,7 +57,7 @@ function RegisterPage() {
                             >{errors.username.message}</span>
                             )
                 }
-                <label htmlFor='email' className='text-slate-500 mb-2 block text-sm' >Correo</label>
+                <label htmlFor='email' className='text-slate-300 mb-2 block text-sm' >Correo</label>
                 <input type="email"
                     {...register("email", {
                         required: {
@@ -71,7 +75,7 @@ function RegisterPage() {
                             >{errors.email.message}</span>
                             )
                 }
-                <label htmlFor='password' className='text-slate-500 mb-2 block text-sm' >Contraseña</label>
+                <label htmlFor='password' className='text-slate-300 mb-2 block text-sm' >Contraseña</label>
                 <input type="password"
                     {...register("password", {
                         required: {
@@ -89,7 +93,7 @@ function RegisterPage() {
                             >{errors.password.message}</span>
                             )
                 }
-                <label htmlFor='confirmPassword' className='text-slate-500 mb-2 block text-sm' >Confirmar contraseña</label>
+                <label htmlFor='confirmPassword' className='text-slate-300 mb-2 block text-sm' >Confirmar contraseña</label>
                 <input type="password"
                     {...register("confirmPassword", {
                         required: {

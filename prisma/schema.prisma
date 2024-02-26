@@ -18,6 +18,7 @@ model User {
   email String @unique
   username String @unique
   password String
+  linkID String
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
