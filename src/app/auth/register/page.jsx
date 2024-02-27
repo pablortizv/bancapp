@@ -8,27 +8,23 @@ function RegisterPage() {
     const router = useRouter();
     const onSubmit = handleSubmit(async data => {
         if(data.password !== data.confirmPassword){
-            alert("Contraseñas no coinciden")
-        }else if(data.password.length < 7) {
-            alert("La contraseña debe mínimo 8 dígitos")
-        } else {
-            const res = await fetch('/api/auth/register', {
-                method: 'POST',
-                body: JSON.stringify({
-                    username: data.username,
-                    email: data.email,
-                    password: data.password
-                }),
-                headers: {
-                    'Content-Type': 'aplication/json'
-                }
-            })
-            
-            if(res.ok){     
-                router.push('/auth/login')
-            }
+            alert("contraseñas no coinciden")
         }
+        const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: data.username,
+                email: data.email,
+                password: data.password
+            }),
+            headers: {
+                'Content-Type': 'aplication/json'
+            }
+        })
         
+        if(res.ok){     
+            router.push('/auth/login')
+        }
         
     })
     return (
