@@ -1,34 +1,45 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation';
 
 function RegisterPage() {
     const { register, handleSubmit, formState: {errors} } = useForm();
+    const [loading, setLoading] = useState(false)
     const router = useRouter();
     const onSubmit = handleSubmit(async data => {
         if(data.password !== data.confirmPassword){
             alert("contraseñas no coinciden")
         }
-        const res = await fetch('/api/auth/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                username: data.username,
-                email: data.email,
-                password: data.password
-            }),
-            headers: {
-                'Content-Type': 'aplication/json'
+        try {
+            setLoading(true)
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: data.username,
+                    email: data.email,
+                    password: data.password
+                }),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            
+            if(res.ok){
+                router.refresh()
+                router.push('/auth/login')
             }
-        })
-        
-        if(res.ok){     
-            router.push('/auth/login')
+            
+        } catch (error) {
+            alert(error)
+        } finally{
+            setLoading(false)
         }
-        
     })
     return (
         <div className='h-[calc(100vh-7rem)] flex justify-center items-center'>
+            {loading && <div className='h-full w-full z-1 absolute gap-x-0 bg-red-100 opacity-30 justify-center flex text-xl '><p>Enviando</p></div>}
+            
             <form onSubmit={onSubmit} className='w-1/2 sm:w-1/4'>
                 <h1 className='text-slate-200 font-bold text-3xl mb-4'>
                     Registro
@@ -109,7 +120,7 @@ function RegisterPage() {
                 }
                 <button 
                     className='w-full bg-blue-500 text-white p-3 rounded-lg mt-2'>
-                    Register
+                    Registrarme
                 </button>
             </form>
         </div>
