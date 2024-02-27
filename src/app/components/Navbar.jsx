@@ -7,7 +7,7 @@ async function Navbar() {
     const session = await getServerSession(authOptions)
     return (
         <nav className='flex justify-between items-center bg-blue-950 text-white text-sm px-5 py-3 sticky mb-14'>
-            <h1 className='text-xl font-bold'><Link href={"/"}>Bancapp </Link></h1>
+            <h1 className='text-xl font-bold'>Bancapp</h1>
             <ul className='flex gap-x-2'>
                 {
                     !session?.user ? (
