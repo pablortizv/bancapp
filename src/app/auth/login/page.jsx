@@ -3,20 +3,12 @@ import React, {useEffect, useState} from 'react'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { useRouter, redirect } from 'next/navigation'
-import { useSession } from 'next-auth/react';
 
 function LoginPage() {
   const [error, setError] = useState(null)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const router = useRouter()
-  const session = useSession();
 
-  useEffect(() => {
-    if (session.data) {
-      redirect('/');
-    }
-  }, [])
-  
   
 
   const onSubmit = handleSubmit( async data => {

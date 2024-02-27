@@ -29,6 +29,12 @@ function HomePage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!session?.data) {
+      redirect('/auth/login');
+    }
+  }, [])
+  
   const selectAccount = (id)=> {
     localStorage.setItem("account", id)
   }
