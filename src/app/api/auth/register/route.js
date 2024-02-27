@@ -36,9 +36,7 @@ export async function POST(request) {
         }
 
         const hashedPassword = await bcrypt.hash(data.password, 10)
-        let responseBelvo;
-        let newUser;
-        try {
+        
             const auth = process.env.AUTH_BELVO
 
             const response = await fetch('https://sandbox.belvo.com/api/links/', {
@@ -55,15 +53,13 @@ export async function POST(request) {
                 }),
             });
 
-            responseBelvo = await response.json();
+            const responseBelvo = await response.json();
             console.log("data: ", data)
             console.log("auth ", auth)
             console.log("responseBelvo ", responseBelvo)
 
-        } catch (error) {
-            console.error('Hubo un problema con el proveedor Belvo:', error);
-        } finally{
-            newUser = await db.user.create({
+
+            const newUser = await db.user.create({
                 data: {
                     username: data.username,
                     email: data.email,
@@ -71,7 +67,7 @@ export async function POST(request) {
                     linkID: responseBelvo.id
                 }
             })
-        }
+        
 
         
 
