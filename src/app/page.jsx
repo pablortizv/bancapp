@@ -29,12 +29,6 @@ function HomePage() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (!session?.data) {
-      redirect('/auth/login');
-    }
-  }, [])
-  
   const selectAccount = (id)=> {
     localStorage.setItem("account", id)
   }
@@ -54,7 +48,7 @@ function HomePage() {
                 className='m-2 p-4 bg-gray-300 rounded shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5'
                 key={account.id}
               >
-                  <h3 className='text-xl font-bold mb-2'>Banco: {account?.institution?.name && 'Erebor Bank'}</h3>
+                  <h3 className='text-xl font-bold mb-2'>Banco: {account.institution.name && 'Erebor Bank'}</h3>
                   <p className='mb-2'>Tipo de cuenta: {account.type}</p>
                   <p>Nombre del servicio: {account.name}</p>
               </Link>

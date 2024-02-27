@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { useRouter, redirect } from 'next/navigation'
@@ -8,8 +8,6 @@ function LoginPage() {
   const [error, setError] = useState(null)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const router = useRouter()
-
-  
 
   const onSubmit = handleSubmit( async data => {
     const res = await signIn('credentials', {
@@ -20,7 +18,7 @@ function LoginPage() {
     if(res.error) {
       setError(res.error)
     } else{
-      router.push('/dashboard')
+      redirect('/dashboard')
       router.refresh()
     }
     
