@@ -32,9 +32,9 @@ function AccountsPage() {
         <div className="w-full text-white flex justify-center items-center h-screen text-xl"><span>Cargando...</span></div>
       ) : (
         <div className='w-1/2 bg-slate-100 rounded text-gray-900 flex flex-wrap justify-center items-center space-y-4 p-4'>
-          <h1 className='text-2xl font-bold'>{data.name}</h1>
+          <div className='w-full text-center block'><h1 className='text-2xl font-bold'>{data.name}</h1></div>
           
-          <div className='space-y-2'>
+          <div className='space-y-2 w-full px-5'>
             <p>Tipo de cuenta: {data.type}</p>
             <p>Saldo actual: {data.balance.current}</p>
             <p>Moneda: {data.currency}</p>
