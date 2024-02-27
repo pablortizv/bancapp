@@ -27,7 +27,7 @@ async function Navbar() {
                         (
                             <>
                                 <li>
-                                    <Link href={"/"}>
+                                    <Link href={"/dashboard"}>
                                         Dashboard
                                     </Link>
                                 </li>
