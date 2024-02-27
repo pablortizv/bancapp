@@ -59,6 +59,7 @@ export async function POST(request) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             responseBelvo = await response.json();
+            console.log(responseBelvo)
 
         } catch (error) {
             console.error('Hubo un problema con el proveedor Belvo:', error);
