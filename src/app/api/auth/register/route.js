@@ -55,9 +55,6 @@ export async function POST(request) {
                 }),
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
             responseBelvo = await response.json();
             console.log("data: ", data)
             console.log("auth ", auth)
