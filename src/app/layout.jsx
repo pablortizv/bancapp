@@ -12,8 +12,7 @@ export const metadata = {
   description: "Código de prueba",
 };
 
-export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions);
+export default async function RootLayout({ children, session }) {
   return (
     <html lang="es">
       <body className={inter.className }>

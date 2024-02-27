@@ -18,7 +18,7 @@ function LoginPage() {
     if(res.error) {
       setError(res.error)
     } else{
-      redirect('/dashboard')
+      router.push('/dashboard')
       router.refresh()
     }
     
