@@ -18,8 +18,8 @@ function LoginPage() {
     if(res.error) {
       setError(res.error)
     } else{
-      router.refresh()
       router.push('/')
+      router.refresh()
     }
     
 })
