@@ -31,17 +31,17 @@ export const authOptions = {
     pages: {
         signIn: "/auth/login"
     },
-    // callbacks: {
-    //     async session({ session, token, user }) {
-    //         const userFound = await db.user.findUnique({
-    //             where: {
-    //                 email: token.email
-    //             }
-    //         })
-    //         session.accessToken = userFound.linkID
-    //         return session
-    //     }
-    // },
+    callbacks: {
+        async session({ session, token, user }) {
+            const userFound = await db.user.findUnique({
+                where: {
+                    email: token.email
+                }
+            })
+            session.accessToken = userFound.linkID
+            return session
+        }
+    },
     
 }
 

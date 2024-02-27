@@ -54,10 +54,6 @@ export async function POST(request) {
             });
 
             const responseBelvo = await response.json();
-            console.log("data: ", data)
-            console.log("auth ", auth)
-            console.log("responseBelvo ", responseBelvo)
-
 
             const newUser = await db.user.create({
                 data: {
